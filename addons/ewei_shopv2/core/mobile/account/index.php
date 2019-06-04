@@ -38,6 +38,7 @@ class Index_EweiShopV2Page extends MobilePage
 		if ($_W['ispost']) {
 			$mobile = trim($_GPC['mobile']);
 			$pwd = trim($_GPC['pwd']);
+
 			$member = pdo_fetch('select id,openid,mobile,pwd,salt from ' . tablename('ewei_shop_member') . ' where mobile=:mobile and mobileverify=1 and uniacid=:uniacid limit 1', array(':mobile' => $mobile, ':uniacid' => $_W['uniacid']));
 
 			if (empty($member)) {
@@ -86,7 +87,7 @@ class Index_EweiShopV2Page extends MobilePage
 			$mobile = trim($_GPC['mobile']);
 			$verifycode = trim($_GPC['verifycode']);
 			$pwd = trim($_GPC['pwd']);
-
+			$uid = trim($_GPC['uid']);
 			if (empty($mobile)) {
 				show_json(0, '请输入正确的手机号');
 			}
@@ -125,8 +126,10 @@ class Index_EweiShopV2Page extends MobilePage
 					$nickname = substr($mobile, 0, 3) . 'xxxx' . substr($mobile, 7, 4);
 				}
 
-				$data = array('uniacid' => $_W['uniacid'], 'mobile' => $mobile, 'nickname' => $nickname, 'openid' => $openid, 'pwd' => md5($pwd . $salt), 'salt' => $salt, 'createtime' => time(), 'mobileverify' => 1, 'comefrom' => 'mobile');
+				$data = array('uniacid' => $_W['uniacid'], 'mobile' => $mobile, 'nickname' => $nickname, 'openid' => $openid, 'pwd' => md5($pwd . $salt), 'salt' => $salt, 'createtime' => time(), 'mobileverify' => 1, 'comefrom' => 'mobile','agenrid' => $uid);
+				var_dump($data);exit;
 			}
+
 			else {
 				if (empty($member)) {
 					show_json(0, '此手机号未注册');

@@ -57,7 +57,7 @@ class Cache_EweiShopV2Model
 	{
 		global $_W;
 
-		if (function_exists('redis')) {
+		if (function_exists('redis')) { //function_exists — 如果给定的函数已经被定义就返回 TRUE
 			$redis = redis();
 
 			if (!is_error($redis)) {
