@@ -157,9 +157,8 @@ class Member_EweiShopV2Model {
                 }
             }
         }
-        $credits = $this->getCredits($openid);
-        $info['credit1'] = $credits['credit1'];
-        $info['credit2'] = $credits['credit2'];
+        $info['credit1'] =  $info['credit1'];
+        $info['credit2'] =  $info['credit2'];
         return $info;
     }
 

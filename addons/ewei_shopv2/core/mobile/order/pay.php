@@ -126,15 +126,15 @@ class Pay_EweiShopV2Page extends MobileLoginPage
 			$credit = array( "success" => true, "current" => $member["credit2"] );
 		}
 		$order["price"] = floatval($order["price"]);
-		$plugincoupon = com("coupon");
-		if( $plugincoupon ) 
-		{
-			$coupondata = $plugincoupon->getCouponByDataID($order["couponid"]);
-			if( $coupondata["used"] == 1 ) 
-			{
-				$this->message("出错了,此优惠券已经被使用过,请刷新页面重新下单");
-			}
-		}
+//		$plugincoupon = com("coupon");
+//		if( $plugincoupon )
+//		{
+//			$coupondata = $plugincoupon->getCouponByDataID($order["couponid"]);
+//			if( $coupondata["used"] == 1 )
+//			{
+//				$this->message("出错了,此优惠券已经被使用过,请刷新页面重新下单");
+//			}
+//		}
 		if( empty($order["price"]) && !$credit["success"] ) 
 		{
 			header("location: " . mobileUrl("order/pay/complete", array( "id" => $order["id"], "type" => "credit", "ordersn" => $order["ordersn"] )));
