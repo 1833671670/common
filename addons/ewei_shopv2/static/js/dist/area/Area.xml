@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?> 
  <address>
 <province name="请选择省份">
 	<city name="请选择城市">
@@ -472,8 +472,7 @@
   </city>
  <city name="鄂尔多斯市">
   <county name="东胜区" /> 
-  <county name="康巴什区" />
-  <county name="达拉特旗" />
+  <county name="达拉特旗" /> 
   <county name="准格尔旗" /> 
   <county name="鄂托克前旗" /> 
   <county name="鄂托克旗" /> 
@@ -707,10 +706,6 @@
   <county name="九台市" /> 
   <county name="榆树市" /> 
   <county name="德惠市" /> 
-  <county name="长春经济技术开发区" />
-  <county name="长春净月高新技术产业开发区" />
-  <county name="长春高新技术产业开发区" />
-  <county name="长春汽车经济技术开发区" />
   </city>
  <city name="吉林市">
   <county name="市辖区" /> 
@@ -1229,7 +1224,7 @@
   <county name="椒江区" /> 
   <county name="黄岩区" /> 
   <county name="路桥区" /> 
-  <county name="玉环市" />
+  <county name="玉环县" /> 
   <county name="三门县" /> 
   <county name="天台县" /> 
   <county name="仙居县" /> 
@@ -2421,7 +2416,6 @@
   <county name="光明新区" />
   <county name="龙华新区" />
   <county name="大鹏新区" />
-  <county name="坪山区" />
   </city>
  <city name="珠海市">
   <county name="市辖区" /> 
@@ -2602,7 +2596,7 @@
   <county name="罗定市" /> 
   </city>
   </province>
- <province name="广西壮族自治区">
+ <province name="广西区">
  <city name="南宁市">
   <county name="市辖区" /> 
   <county name="兴宁区" /> 
@@ -2765,10 +2759,6 @@
   </city>
  <city name="三亚市">
   <county name="市辖区" /> 
-  <county name="海棠区" />
-  <county name="吉阳区" />
-  <county name="天涯区" />
-  <county name="崖州区" />
   </city>
  <city name="海南直辖县">
   <county name="五指山市" /> 
@@ -3108,7 +3098,8 @@
  <city name="遵义市">
   <county name="市辖区" /> 
   <county name="红花岗区" /> 
-  <county name="汇川区" />
+  <county name="汇川区" /> 
+  <county name="遵义县" /> 
   <county name="桐梓县" /> 
   <county name="绥阳县" /> 
   <county name="正安县" /> 
@@ -3120,7 +3111,6 @@
   <county name="习水县" /> 
   <county name="赤水市" /> 
   <county name="仁怀市" /> 
-  <county name="播州区" />
   </city>
  <city name="安顺市">
   <county name="市辖区" /> 

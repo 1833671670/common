@@ -24,9 +24,6 @@
 	</div>
 	
 		<script type="text/javascript" src="<?php  echo $_W['siteroot'];?>web/index.php?c=utility&a=visit&do=showjs&type=<?php echo FRAME;?>"></script>
-	    <script>
-            var height = document.documentElement.clientHeight - 50;
-            $('#content').height(height);
-        </script>
+	
 </body>
 </html>

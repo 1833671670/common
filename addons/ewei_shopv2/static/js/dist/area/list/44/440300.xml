@@ -57,6 +57,7 @@
 <county name="龙岗区" code="440307">
     <street name="平湖街道" code="440307003" />
     <street name="坪地街道" code="440307006" />
+    <street name="坪山街道" code="440307007" />
     <street name="坑梓街道" code="440307008" />
     <street name="葵涌街道" code="440307009" />
     <street name="大鹏街道" code="440307010" />
@@ -86,12 +87,8 @@
     <county name="龙华新区" code="440311">
         <street name="龙华新区街道" code="440311001" />
     </county>
-    <county name="大鹏新区" code="440312">
-        <street name="大鹏新区街道" code="440312001" />
-    </county>
-    <county name="坪山区" code="440313">
-        <street name="坪山街道" code="440313001" />
-        <street name="坑梓街道" code="440313002" />
+    <county name="大鹏新区" code="440311">
+        <street name="大鹏新区街道" code="440311001" />
     </county>
 </city>
 </address>

@@ -43,7 +43,6 @@
             <county name="八公山区" code="340405" />
             <county name="潘集区" code="340406" />
             <county name="凤台县" code="340421" />
-            <county name="寿县" code="340422" />
         </city>
         <city name="马鞍山市" code="340500">
             <county name="花山区" code="340503" />
@@ -403,12 +402,12 @@
             <county name="武都区" code="621202" />
             <county name="成县" code="621221" />
             <county name="文县" code="621222" />
-            <county name="宕昌县" code="621223" />
+            <county name="宕昌" code="621223" />
             <county name="康县" code="621224" />
-            <county name="西和县" code="621225" />
+            <county name="西和昌" code="621225" />
             <county name="礼县" code="621226" />
             <county name="徽县" code="621227" />
-            <county name="两当县" code="621228" />
+            <county name="两当昌" code="621228" />
         </city>
         <city name="临夏州" code="622900">
             <county name="临夏市" code="622901" />
@@ -470,7 +469,6 @@
             <county name="光明新区" code="440310"/>
             <county name="龙华新区" code="440311"/>
             <county name="大鹏新区" code="440312"/>
-            <county name="坪山区" code="440313"/>
         </city>
         <city name="珠海市" code="440400">
             <county name="香洲区" code="440402" />
@@ -578,67 +576,10 @@
             <county name="连州市" code="441882" />
         </city>
         <city name="东莞市" code="441900">
-            <county name="东城街道" code="441901003" />
-            <county name="南城街道" code="441901004" />
-            <county name="万江街道" code="441901005" />
-            <county name="莞城街道" code="441901006" />
-            <county name="石碣镇" code="441901101" />
-            <county name="石龙镇" code="441901102" />
-            <county name="茶山镇" code="441901103" />
-            <county name="石排镇" code="441901104" />
-            <county name="企石镇" code="441901105" />
-            <county name="横沥镇" code="441901106" />
-            <county name="桥头镇" code="441901107" />
-            <county name="谢岗镇" code="441901108" />
-            <county name="东坑镇" code="441901109" />
-            <county name="常平镇" code="441901110" />
-            <county name="寮步镇" code="441901111" />
-            <county name="樟木头镇" code="441901112" />
-            <county name="大朗镇" code="441901113" />
-            <county name="黄江镇" code="441901114" />
-            <county name="清溪镇" code="441901115" />
-            <county name="塘厦镇" code="441901116" />
-            <county name="凤岗镇" code="441901117" />
-            <county name="大岭山镇" code="441901118" />
-            <county name="长安镇" code="441901119" />
-            <county name="虎门镇" code="441901121" />
-            <county name="厚街镇" code="441901122" />
-            <county name="沙田镇" code="441901123" />
-            <county name="道滘镇" code="441901124" />
-            <county name="洪梅镇" code="441901125" />
-            <county name="麻涌镇" code="441901126" />
-            <county name="望牛墩镇" code="441901127" />
-            <county name="中堂镇" code="441901128" />
-            <county name="高埗镇" code="441901129" />
-            <county name="松山湖管委会" code="441901401" />
-            <county name="虎门港管委会" code="441901402" />
-            <county name="东莞生态园" code="441901403" />
+            <county name="东莞" code="441900001" />
         </city>
         <city name="中山市" code="442000">
-            <county name="石岐区街道办事处" code="442000001000"/>
-            <county name="东区街道办事处" code="442000002000"/>
-            <county name="火炬开发区街道办事处" code="442000003000"/>
-            <county name="西区街道办事处" code="442000004000"/>
-            <county name="南区街道办事处" code="442000005000"/>
-            <county name="五桂山街道办事处" code="442000006000"/>
-            <county name="小榄镇" code="442000100000"/>
-            <county name="黄圃镇" code="442000101000"/>
-            <county name="民众镇" code="442000102000"/>
-            <county name="东凤镇" code="442000103000"/>
-            <county name="东升镇" code="442000104000"/>
-            <county name="古镇镇" code="442000105000"/>
-            <county name="沙溪镇" code="442000106000"/>
-            <county name="坦洲镇" code="442000107000"/>
-            <county name="港口镇" code="442000108000"/>
-            <county name="三角镇" code="442000109000"/>
-            <county name="横栏镇" code="442000110000"/>
-            <county name="南头镇" code="442000111000"/>
-            <county name="阜沙镇" code="442000112000"/>
-            <county name="南朗镇" code="442000113000"/>
-            <county name="三乡镇" code="442000114000"/>
-            <county name="板芙镇" code="442000115000"/>
-            <county name="大涌镇" code="442000116000"/>
-            <county name="神湾镇" code="442000117000"/>
+            <county name="中山" code="442000001" />
         </city>
         <city name="潮州市" code="445100">
             <county name="湘桥区" code="445102" />
@@ -660,7 +601,7 @@
             <county name="罗定市" code="445381" />
         </city>
     </province>
-    <province name="广西壮族自治区" code="450000">
+    <province name="广西省" code="450000">
         <city name="南宁市" code="450100">
             <county name="兴宁区" code="450102" />
             <county name="青秀区" code="450103" />
@@ -823,7 +764,7 @@
         <city name="遵义市" code="520300">
             <county name="红花岗区" code="520302" />
             <county name="汇川区" code="520303" />
-            <county name="播州区" code="520304" />
+            <county name="遵义县" code="520321" />
             <county name="桐梓县" code="520322" />
             <county name="绥阳县" code="520323" />
             <county name="正安县" code="520324" />
@@ -917,11 +858,10 @@
             <county name="美兰区" code="460108" />
         </city>
         <city name="三亚市" code="460200">
-            <county name="市辖区" code="460201" />
-            <county name="海棠区" code="460202" />
-            <county name="吉阳区" code="460203" />
-            <county name="天涯区" code="460204" />
-            <county name="崖州区" code="460205" />
+            <county name="海棠湾镇" code="460202" />
+            <county name="吉阳镇" code="460203" />
+            <county name="天涯镇" code="460204" />
+            <county name="崖城镇" code="460205" />
         </city>
         <city name="三沙" code="460300">
             <county name="西沙群岛" code="460321" />
@@ -1836,14 +1776,14 @@
             <county name="高淳区" code="320125" />
         </city>
         <city name="无锡市" code="320200">
-            <county code="320205000000"	name="锡山区"/>
-            <county code="320206000000"	name="惠山区"/>
-            <county code="320211000000"	name="滨湖区"/>
-            <county code="320213000000"	name="梁溪区"/>
-            <county code="320214000000"	name="新吴区"/>
-            <county code="320281000000"	name="江阴市"/>
-            <county code="320282000000"	name="宜兴市"/>
-
+            <county name="崇安区" code="320202" />
+            <county name="南长区" code="320203" />
+            <county name="北塘区" code="320204" />
+            <county name="锡山区" code="320205" />
+            <county name="惠山区" code="320206" />
+            <county name="滨湖区" code="320211" />
+            <county name="江阴市" code="320281" />
+            <county name="宜兴市" code="320282" />
         </city>
         <city name="徐州市" code="320300">
             <county name="鼓楼区" code="320302" />
@@ -1957,10 +1897,9 @@
             <county name="湾里区" code="360105" />
             <county name="青山湖区" code="360111" />
             <county name="南昌县" code="360121" />
-            <county name="新建区" code="360122" />
+            <county name="新建县" code="360122" />
             <county name="安义县" code="360123" />
             <county name="进贤县" code="360124" />
-            <county name="红谷滩新区" code="360125" />
         </city>
         <city name="景德镇市" code="360200">
             <county name="昌江区" code="360202" />
@@ -2086,10 +2025,6 @@
             <county name="九台市" code="220181" />
             <county name="榆树市" code="220182" />
             <county name="德惠市" code="220183" />
-            <county name="长春经济技术开发区" code="220184" />
-            <county name="长春净月高新技术产业开发区" code="220185" />
-            <county name="长春高新技术产业开发区" code="220186" />
-            <county name="长春汽车经济技术开发区" code="220187" />
         </city>
         <city name="吉林市" code="220200">
             <county name="昌邑区" code="220202" />
@@ -2345,7 +2280,6 @@
         </city>
         <city name="鄂尔多斯市" code="150600">
             <county name="东胜区" code="150602" />
-            <county name="康巴什区" code="150603" />
             <county name="达拉特旗" code="150621" />
             <county name="准格尔旗" code="150622" />
             <county name="鄂托克前旗" code="150623" />
@@ -3717,7 +3651,7 @@
             <county name="椒江区" code="331002" />
             <county name="黄岩区" code="331003" />
             <county name="路桥区" code="331004" />
-            <county name="玉环市" code="331021" />
+            <county name="玉环县" code="331021" />
             <county name="三门县" code="331022" />
             <county name="天台县" code="331023" />
             <county name="仙居县" code="331024" />
