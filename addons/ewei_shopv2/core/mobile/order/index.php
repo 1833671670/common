@@ -96,7 +96,7 @@ class Index_EweiShopV2Page extends MobileLoginPage {
 
         $list = pdo_fetchall("select id,addressid,ordersn,price,dispatchprice,status,iscomment,isverify,verifyendtime,
 verified,verifycode,verifytype,iscomment,refundid,expresscom,express,expresssn,finishtime,`virtual`,sendtype,
-paytype,expresssn,refundstate,dispatchtype,verifyinfo,merchid,isparent,iscycelbuy,cycelbuy_periodic,userdeleted{$s_string}
+paytype,expresssn,refundstate,dispatchtype,verifyinfo,merchid,isparent,iscycelbuy,good_inte,cycelbuy_periodic,userdeleted{$s_string}
  from " . tablename('ewei_shop_order') . " where 1 {$condition} order by createtime desc LIMIT " . ($pindex - 1) * $psize . ',' . $psize, $params);
         $total = pdo_fetchcolumn('select count(*) from ' . tablename('ewei_shop_order') . " where 1 {$condition}", $params);
 

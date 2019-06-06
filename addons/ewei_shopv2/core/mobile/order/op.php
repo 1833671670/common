@@ -66,13 +66,20 @@ class Op_EweiShopV2Page extends MobileLoginPage
 		m("notice")->sendOrderMessage($orderid);
 		show_json(1);
 	}
+
 	public function finish() 
 	{
 		global $_W;
 		global $_GPC;
 		$orderid = intval($_GPC["id"]);
 		$order = pdo_fetch("select id,status,openid,couponid,price,refundstate,refundid,ordersn,price from " . tablename("ewei_shop_order") . " where id=:id and uniacid=:uniacid and openid=:openid limit 1", array( ":id" => $orderid, ":uniacid" => $_W["uniacid"], ":openid" => $_W["openid"] ));
-		if( empty($order) ) 
+
+        $item = pdo_get('ewei_shop_order_goods',array('orderid'=>$orderid,'uniacid'=>$_W['uniacid']),array('goodsid','total'));
+        $item1 = pdo_get('ewei_shop_goods',array('id'=>$item['goodsid']),array('good_inte'));
+        $finalinte = $item1['good_inte'] * $item['total'];
+        $member = m("member")->getMember($_W["openid"], true);
+        $good_inte = $finalinte + $member['good_inte'];
+		if( empty($order) )
 		{
 			show_json(0, "订单未找到");
 		}
@@ -87,7 +94,11 @@ class Op_EweiShopV2Page extends MobileLoginPage
 			$change_refund["refundtime"] = time();
 			pdo_update("ewei_shop_order_refund", $change_refund, array( "id" => $order["refundid"], "uniacid" => $_W["uniacid"] ));
 		}
+		//修改订单的信息，完成订单
 		pdo_update("ewei_shop_order", array( "status" => 3, "finishtime" => time(), "refundstate" => 0 ), array( "id" => $order["id"], "uniacid" => $_W["uniacid"] ));
+
+
+        pdo_update("ewei_shop_member",array("good_inte"=>$good_inte),array('id'=>$member['id']));
 		m("order")->setStocksAndCredits($orderid, 3);
 		m("order")->fullback($orderid);
 		m("member")->upgradeLevel($order["openid"], $orderid);
