@@ -3,7 +3,7 @@ defined('IN_IA') or exit('Access Denied');
 
 $config = array();
 
-$config['db']['master']['host'] = '127.0.0.1';
+$config['db']['master']['host'] = '192.168.1.107';
 $config['db']['master']['username'] = 'root';
 $config['db']['master']['password'] = 'root';
 $config['db']['master']['port'] = '3306';
@@ -54,7 +54,7 @@ $config['setting']['redis']['server'] = '127.0.0.1';
 $config['setting']['redis']['port'] = 6379;
 $config['setting']['redis']['pconnect'] = 1;
 $config['setting']['redis']['timeout'] = 30;
-$config['setting']['redis']['session'] = 1;
+$config['setting']['redis']['session'] = 0;
 
 // --------------------------  CONFIG MEMCACHE  --------------------------- //
 $config['setting']['memcache']['server'] = '';

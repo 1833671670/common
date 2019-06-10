@@ -199,6 +199,10 @@ class Index_EweiShopV2Page extends MobileLoginPage
 				$hasdividend = true;
 			}
 		}
+		// 今日收入
+
+		// 累计收入
+
 		include($this->template());
 	}
 }

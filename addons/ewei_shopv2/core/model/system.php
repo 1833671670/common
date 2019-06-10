@@ -676,6 +676,10 @@ class System_EweiShopV2Model {
                     array(
                         "title" => "股东规则",
                         "route" => "shareholderRule"
+                    ),
+                    array(
+                        "title" => "转账记录",
+                        "route" => "transfer"
                     )
                 )
             ) ,
