@@ -648,47 +648,9 @@ class System_EweiShopV2Model {
                         "title" => "标签管理",
                         "route" => "label",
                         "extend" => "goods.label.style"
-                    ) ,
-                    array(
-                        "title" => "虚拟卡密",
-                        "route" => "virtual",
-                        "iscom" => "virtual",
-                        "items" => array(
-                            array(
-                                "title" => "虚拟卡密",
-                                "route" => "temp",
-                                "extend" => "goods.virtual.data"
-                            ) ,
-                            array(
-                                "title" => "卡密分类",
-                                "route" => "category"
-                            ) ,
-                            array(
-                                "title" => "设置",
-                                "route" => "set"
-                            )
-                        )
                     )
                 )
             ) ,
-            "admins"    => array(
-                "title"    => "管理",
-                "subtitle" => "管理员管理",
-                "icon"     => "store",
-                "items"    => array(
-                    array(
-                        "title"  => "管理员",
-                        "extend" => "admins.list",
-                        "perm"   => "amdins.main",
-                        "desc"   => "管理员管理"
-                    ),
-                    array(
-                        "title" => "权限",
-                        "route" => "job",
-                        "desc"  => "权限管理"
-                    )
-                )
-            ),
             "member" => array(
                 "title" => "会员",
                 "subtitle" => "会员管理",
@@ -714,6 +676,10 @@ class System_EweiShopV2Model {
                     array(
                         "title" => "股东规则",
                         "route" => "shareholderRule"
+                    ),
+                    array(
+                        "title" => "转账记录",
+                        "route" => "transfer"
                     )
                 )
             ) ,
@@ -754,22 +720,6 @@ class System_EweiShopV2Model {
                         "permmust" => "order.list.main"
                     ) ,
                     array(
-                        "title" => "维权",
-                        "route" => "list",
-                        "items" => array(
-                            array(
-                                "title" => "维权申请",
-                                "route" => "status4",
-                                "desc" => "维权申请管理"
-                            ) ,
-                            array(
-                                "title" => "维权完成",
-                                "route" => "status5",
-                                "desc" => "维权完成管理"
-                            )
-                        )
-                    ) ,
-                    array(
                         "title" => "工具",
                         "items" => array(
                             array(
@@ -781,182 +731,6 @@ class System_EweiShopV2Model {
                                 "title" => "批量发货",
                                 "route" => "batchsend",
                                 "desc" => "订单批量发货"
-                            )
-                        )
-                    )
-                )
-            ) ,
-            "store" => array(
-                "title" => "门店",
-                "subtitle" => "门店",
-                "icon" => "mendianguanli",
-                "items" => array(
-                    array(
-                        "title" => "门店管理",
-                        "items" => array(
-                            array(
-                                "title" => "门店管理",
-                                "route" => "",
-                                "extends" => array(
-                                    "store.diypage.settings",
-                                    "store.diypage.page",
-                                    "store.goods",
-                                    "store.goods.goodsoption"
-                                )
-                            ) ,
-                            array(
-                                "title" => "店员管理",
-                                "route" => "saler"
-                            ) ,
-                            array(
-                                "title" => "关键词设置",
-                                "route" => "set"
-                            )
-                        )
-                    ) ,
-                    array(
-                        "title" => "门店商品管理",
-                        "items" => array(
-                            array(
-                                "title" => "记次时商品管理",
-                                "route" => "verifygoods",
-                                "extends" => array(
-                                    "store.verifygoods.detail",
-                                    "store.verifygoods.verifygoodslog"
-                                )
-                            )
-                        )
-                    ) ,
-                    array(
-                        "title" => "记次时商品统计",
-                        "route" => "verify.log"
-                    ) ,
-                    array(
-                        "title" => "核销订单记录",
-                        "route" => "verifyorder.log"
-                    )
-                )
-            ) ,
-            "sale" => array(
-                "title" => "营销",
-                "subtitle" => "营销设置",
-                "icon" => "yingxiao",
-                "items" => array(
-                    array(
-                        "title" => "基本功能",
-                        "items" => array(
-                            array(
-                                "title" => "满额立减",
-                                "route" => "enough",
-                                "desc" => "满额立减设置",
-                                "keywords" => "营销"
-                            ) ,
-                            array(
-                                "title" => "满额包邮",
-                                "route" => "enoughfree",
-                                "desc" => "满额包邮设置",
-                                "keywords" => "营销"
-                            ) ,
-                            array(
-                                "title" => "抵扣设置",
-                                "route" => "deduct",
-                                "desc" => "抵扣设置",
-                                "keywords" => "营销"
-                            ) ,
-                            array(
-                                "title" => "充值优惠",
-                                "route" => "recharge",
-                                "desc" => "充值优惠设置",
-                                "keywords" => "营销"
-                            ) ,
-                            array(
-                                "title" => "积分优惠",
-                                "route" => "credit1",
-                                "desc" => "积分优惠设置",
-                                "keywords" => "营销"
-                            ) ,
-                            array(
-                                "title" => "套餐管理",
-                                "route" => "package",
-                                "keywords" => "营销"
-                            ) ,
-                            array(
-                                "title" => "赠品管理",
-                                "route" => "gift",
-                                "keywords" => "营销"
-                            ) ,
-                            array(
-                                "title" => "全返管理",
-                                "route" => "fullback",
-                                "keywords" => "营销"
-                            ) ,
-                            array(
-                                "title" => "找人代付",
-                                "route" => "peerpay",
-                                "keywords" => "营销"
-                            ) ,
-                            array(
-                                "title" => "绑定送积分",
-                                "route" => "bindmobile"
-                            )
-                        )
-                    ) ,
-                    array(
-                        "title" => "优惠券",
-                        "route" => "coupon",
-                        "iscom" => "coupon",
-                        "items" => array(
-                            array(
-                                "title" => "全部优惠券"
-                            ) ,
-                            array(
-                                "title" => "手动发送",
-                                "route" => "sendcoupon",
-                                "desc" => "手动发送优惠券"
-                            ) ,
-                            array(
-                                "title" => "购物送券",
-                                "route" => "shareticket",
-                                "extends" => array(
-                                    "sale.coupon.goodssend",
-                                    "sale.coupon.usesendtask",
-                                    "sale.coupon.goodssend.add",
-                                    "sale.coupon.usesendtask.add"
-                                )
-                            ) ,
-                            array(
-                                "title" => "发放记录",
-                                "route" => "log",
-                                "desc" => "优惠券发放记录"
-                            ) ,
-                            array(
-                                "title" => "分类管理",
-                                "route" => "category",
-                                "desc" => "优惠券分类管理"
-                            ) ,
-                            array(
-                                "title" => "其他设置",
-                                "route" => "set",
-                                "desc" => "优惠券设置"
-                            )
-                        )
-                    ) ,
-                    array(
-                        "title" => "微信卡券",
-                        "iscom" => "wxcard",
-                        "items" => array(
-                            array(
-                                "title" => "卡券管理",
-                                "route" => "wxcard"
-                            )
-                        )
-                    ) ,
-                    array(
-                        "title" => "其他工具",
-                        "items" => array(
-                            array(
-                                "title" => "关注回复",
-                                "route" => "virtual"
                             )
                         )
                     )
@@ -1060,7 +834,6 @@ class System_EweiShopV2Model {
                     )
                 )
             ) ,
-            "app" => $this->pluginMenu("app") ,
             "plugins" => array(
                 "title" => "应用",
                 "subtitle" => "应用管理",
@@ -1153,27 +926,6 @@ class System_EweiShopV2Model {
                         )
                     ) ,
                     array(
-                        "title" => "小票打印机",
-                        "route" => "printer",
-                        "iscom" => "printer",
-                        "items" => array(
-                            array(
-                                "title" => "打印机管理",
-                                "route" => "printer_list",
-                                "extends" => array(
-                                    "sysset.printer.printer_add"
-                                )
-                            ) ,
-                            array(
-                                "title" => "打印机模板库"
-                            ) ,
-                            array(
-                                "title" => "打印设置",
-                                "route" => "set"
-                            )
-                        )
-                    ) ,
-                    array(
                         "title" => "其他",
                         "items" => array(
                             array(
@@ -1195,32 +947,6 @@ class System_EweiShopV2Model {
                             array(
                                 "title" => "物流信息接口",
                                 "route" => "express"
-                            )
-                        )
-                    ) ,
-                    array(
-                        "title" => "工具",
-                        "items" => array(
-                            array(
-                                "title" => "七牛存储",
-                                "route" => "qiniu",
-                                "iscom" => "qiniu"
-                            ) ,
-                            array(
-                                "title" => "商品价格修复",
-                                "route" => "goodsprice"
-                            ) ,
-                            array(
-                                "title" => "模板消息修复",
-                                "route" => "templatetool"
-                            ) ,
-                            array(
-                                "title" => "清空海报缓存",
-                                "route" => "postertool"
-                            ) ,
-                            array(
-                                "title" => "支付证书验证",
-                                "route" => "wxpaycert"
                             )
                         )
                     ) ,
@@ -1281,235 +1007,235 @@ class System_EweiShopV2Model {
         return $shopmenu;
     }
     protected function systemMenu() {
-        return array(
-            "plugin" => array(
-                "title" => "应用",
-                "subtitle" => "应用管理",
-                "icon" => "plugins",
-                "items" => array(
-                    array(
-                        "title" => "应用信息"
-                    ) ,
-                    array(
-                        "title" => "组件信息",
-                        "route" => "coms"
-                    ) ,
-                    array(
-                        "title" => "公众号权限",
-                        "route" => "perm"
-                    ) ,
-                    array(
-                        "title" => "站点小程序",
-                        "route" => "wxapp",
-                        "route" => "wxapp",
-                        "isplugin" => "app"
-                    ) ,
-                    array(
-                        'title' => '商家管理程序',
-                        'route' => 'release1',
-                        'route' => 'release1',
-                        'isplugin' => 'app'
-                    ) ,
-                    array(
-                        "title" => "应用授权管理",
-                        "isplugin" => "grant",
-                        "items" => array(
-                            array(
-                                "title" => "幻灯片管理",
-                                "route" => "pluginadv"
-                            ) ,
-                            array(
-                                "title" => "授权应用管理",
-                                "route" => "pluginmanage"
-                            ) ,
-                            array(
-                                "title" => "授权套餐管理",
-                                "route" => "pluginpackage"
-                            ) ,
-                            array(
-                                "title" => "销售记录",
-                                "route" => "pluginsale"
-                            ) ,
-                            array(
-                                "title" => "系统授权管理",
-                                "route" => "plugingrant"
-                            ) ,
-                            array(
-                                "title" => "授权管理设置",
-                                "route" => "pluginsetting"
-                            )
-                        )
-                    )
-                )
-            ) ,
-            "copyright" => array(
-                "title" => "版权",
-                "subtitle" => "版权设置",
-                "icon" => "banquan",
-                "items" => array(
-                    array(
-                        "title" => "手机端"
-                    ) ,
-                    array(
-                        "title" => "管理端",
-                        "route" => "manage"
-                    ) ,
-                    array(
-                        "title" => "公告管理",
-                        "items" => array(
-                            array(
-                                "title" => "公告管理",
-                                "route" => "notice"
-                            )
-                        )
-                    )
-                )
-            ) ,
-            "data" => array(
-                "title" => "数据",
-                "subtitle" => "数据管理",
-                "icon" => "statistics",
-                "items" => array(
-                    array(
-                        "title" => "数据清理"
-                    ) ,
-                    array(
-                        "title" => "数据转移",
-                        "route" => "transfer"
-                    ) ,
-                    array(
-                        "title" => "计划任务",
-                        "items" => array(
-                            array(
-                                "title" => "计划任务",
-                                "route" => "task"
-                            )
-                        )
-                    ) ,
-                    array(
-                        "title" => "工具",
-                        "items" => array(
-                            array(
-                                "title" => "七牛存储",
-                                "route" => "qiniu"
-                            )
-                        )
-                    )
-                )
-            ) ,
-            "site" => array(
-                "title" => "网站",
-                "subtitle" => "网站设置",
-                "icon" => "wangzhan",
-                "items" => array(
-                    array(
-                        "title" => "网站",
-                        "items" => array(
-                            array(
-                                "title" => "基本设置"
-                            ) ,
-                            array(
-                                "title" => "幻灯片",
-                                "route" => "banner"
-                            ) ,
-                            array(
-                                "title" => "案例分类",
-                                "route" => "casecategory"
-                            ) ,
-                            array(
-                                "title" => "案例",
-                                "route" => "case"
-                            ) ,
-                            array(
-                                "title" => "友情链接",
-                                "route" => "link"
-                            )
-                        )
-                    ) ,
-                    array(
-                        "title" => "文章",
-                        "items" => array(
-                            array(
-                                "title" => "文章分类",
-                                "route" => "category"
-                            ) ,
-                            array(
-                                "title" => "文章管理",
-                                "route" => "article"
-                            )
-                        )
-                    ) ,
-                    array(
-                        "title" => "内容",
-                        "items" => array(
-                            array(
-                                "title" => "内容分类",
-                                "route" => "companycategory"
-                            ) ,
-                            array(
-                                "title" => "内容管理",
-                                "route" => "companyarticle"
-                            )
-                        )
-                    ) ,
-                    array(
-                        "title" => "留言板",
-                        "items" => array(
-                            array(
-                                "title" => "留言内容",
-                                "route" => "guestbook"
-                            )
-                        )
-                    ) ,
-                    array(
-                        "title" => "设置",
-                        "items" => array(
-                            array(
-                                "title" => "基础设置",
-                                "route" => "setting"
-                            )
-                        )
-                    )
-                )
-            ) ,
-            "auth" => array(
-                "title" => "授权",
-                "subtitle" => "授权管理",
-                "icon" => "iconfont-shouquan",
-                "items" => array(
-                    array(
-                        "title" => "授权管理"
-                    ) ,
-                    array(
-                        "title" => "系统更新",
-                        "route" => "upgrade"
-                    ) ,
-
-                )
-            )
-        );
+//        return array(
+//            "plugin" => array(
+//                "title" => "应用",
+//                "subtitle" => "应用管理",
+//                "icon" => "plugins",
+//                "items" => array(
+//                    array(
+//                        "title" => "应用信息"
+//                    ) ,
+//                    array(
+//                        "title" => "组件信息",
+//                        "route" => "coms"
+//                    ) ,
+//                    array(
+//                        "title" => "公众号权限",
+//                        "route" => "perm"
+//                    ) ,
+//                    array(
+//                        "title" => "站点小程序",
+//                        "route" => "wxapp",
+//                        "route" => "wxapp",
+//                        "isplugin" => "app"
+//                    ) ,
+//                    array(
+//                        'title' => '商家管理程序',
+//                        'route' => 'release1',
+//                        'route' => 'release1',
+//                        'isplugin' => 'app'
+//                    ) ,
+//                    array(
+//                        "title" => "应用授权管理",
+//                        "isplugin" => "grant",
+//                        "items" => array(
+//                            array(
+//                                "title" => "幻灯片管理",
+//                                "route" => "pluginadv"
+//                            ) ,
+//                            array(
+//                                "title" => "授权应用管理",
+//                                "route" => "pluginmanage"
+//                            ) ,
+//                            array(
+//                                "title" => "授权套餐管理",
+//                                "route" => "pluginpackage"
+//                            ) ,
+//                            array(
+//                                "title" => "销售记录",
+//                                "route" => "pluginsale"
+//                            ) ,
+//                            array(
+//                                "title" => "系统授权管理",
+//                                "route" => "plugingrant"
+//                            ) ,
+//                            array(
+//                                "title" => "授权管理设置",
+//                                "route" => "pluginsetting"
+//                            )
+//                        )
+//                    )
+//                )
+//            ) ,
+//            "copyright" => array(
+//                "title" => "版权",
+//                "subtitle" => "版权设置",
+//                "icon" => "banquan",
+//                "items" => array(
+//                    array(
+//                        "title" => "手机端"
+//                    ) ,
+//                    array(
+//                        "title" => "管理端",
+//                        "route" => "manage"
+//                    ) ,
+//                    array(
+//                        "title" => "公告管理",
+//                        "items" => array(
+//                            array(
+//                                "title" => "公告管理",
+//                                "route" => "notice"
+//                            )
+//                        )
+//                    )
+//                )
+//            ) ,
+//            "data" => array(
+//                "title" => "数据",
+//                "subtitle" => "数据管理",
+//                "icon" => "statistics",
+//                "items" => array(
+//                    array(
+//                        "title" => "数据清理"
+//                    ) ,
+//                    array(
+//                        "title" => "数据转移",
+//                        "route" => "transfer"
+//                    ) ,
+//                    array(
+//                        "title" => "计划任务",
+//                        "items" => array(
+//                            array(
+//                                "title" => "计划任务",
+//                                "route" => "task"
+//                            )
+//                        )
+//                    ) ,
+//                    array(
+//                        "title" => "工具",
+//                        "items" => array(
+//                            array(
+//                                "title" => "七牛存储",
+//                                "route" => "qiniu"
+//                            )
+//                        )
+//                    )
+//                )
+//            ) ,
+//            "site" => array(
+//                "title" => "网站",
+//                "subtitle" => "网站设置",
+//                "icon" => "wangzhan",
+//                "items" => array(
+//                    array(
+//                        "title" => "网站",
+//                        "items" => array(
+//                            array(
+//                                "title" => "基本设置"
+//                            ) ,
+//                            array(
+//                                "title" => "幻灯片",
+//                                "route" => "banner"
+//                            ) ,
+//                            array(
+//                                "title" => "案例分类",
+//                                "route" => "casecategory"
+//                            ) ,
+//                            array(
+//                                "title" => "案例",
+//                                "route" => "case"
+//                            ) ,
+//                            array(
+//                                "title" => "友情链接",
+//                                "route" => "link"
+//                            )
+//                        )
+//                    ) ,
+//                    array(
+//                        "title" => "文章",
+//                        "items" => array(
+//                            array(
+//                                "title" => "文章分类",
+//                                "route" => "category"
+//                            ) ,
+//                            array(
+//                                "title" => "文章管理",
+//                                "route" => "article"
+//                            )
+//                        )
+//                    ) ,
+//                    array(
+//                        "title" => "内容",
+//                        "items" => array(
+//                            array(
+//                                "title" => "内容分类",
+//                                "route" => "companycategory"
+//                            ) ,
+//                            array(
+//                                "title" => "内容管理",
+//                                "route" => "companyarticle"
+//                            )
+//                        )
+//                    ) ,
+//                    array(
+//                        "title" => "留言板",
+//                        "items" => array(
+//                            array(
+//                                "title" => "留言内容",
+//                                "route" => "guestbook"
+//                            )
+//                        )
+//                    ) ,
+//                    array(
+//                        "title" => "设置",
+//                        "items" => array(
+//                            array(
+//                                "title" => "基础设置",
+//                                "route" => "setting"
+//                            )
+//                        )
+//                    )
+//                )
+//            ) ,
+//            "auth" => array(
+//                "title" => "授权",
+//                "subtitle" => "授权管理",
+//                "icon" => "iconfont-shouquan",
+//                "items" => array(
+//                    array(
+//                        "title" => "授权管理"
+//                    ) ,
+//                    array(
+//                        "title" => "系统更新",
+//                        "route" => "upgrade"
+//                    ) ,
+//
+//                )
+//            )
+//        );
     }
     protected function otherMenu() {
         return array(
-            "perm" => array(
-                "title" => "权限",
-                "subtitle" => "权限系统",
-                "icon" => "store",
-                "items" => array(
-                    array(
-                        "title" => "角色管理",
-                        "route" => "role"
-                    ) ,
-                    array(
-                        "title" => "操作员管理",
-                        "route" => "user"
-                    ) ,
-                    array(
-                        "title" => "操作日志",
-                        "route" => "log"
-                    )
-                )
-            )
+//            "perm" => array(
+//                "title" => "权限",
+//                "subtitle" => "权限系统",
+//                "icon" => "store",
+//                "items" => array(
+//                    array(
+//                        "title" => "角色管理",
+//                        "route" => "role"
+//                    ) ,
+//                    array(
+//                        "title" => "操作员管理",
+//                        "route" => "user"
+//                    ) ,
+//                    array(
+//                        "title" => "操作日志",
+//                        "route" => "log"
+//                    )
+//                )
+//            )
         );
     }
     protected function pluginMenu($plugin = array() , $key = "menu") {
