@@ -31,10 +31,6 @@ class Index_EweiShopV2Page extends MobilePage
 	{
 		global $_W;
 		global $_GPC;
-		if (is_weixin() || !empty($_GPC['__ewei_shopv2_member_session_' . $_W['uniacid']])) {
-			header('location: ' . mobileUrl());
-		}
-
 		if ($_W['ispost']) {
 			$mobile = trim($_GPC['mobile']);
 			$pwd = trim($_GPC['pwd']);
@@ -79,15 +75,13 @@ class Index_EweiShopV2Page extends MobilePage
 	{
 		global $_W;
 		global $_GPC;
-		if (is_weixin() || !empty($_GPC['__ewei_shopv2_member_session_' . $_W['uniacid']])) {
-			header('location: ' . mobileUrl());
-		}
 
 		if ($_W['ispost']) {
 			$mobile = trim($_GPC['mobile']);
 			$verifycode = trim($_GPC['verifycode']);
 			$pwd = trim($_GPC['pwd']);
 			$uid = trim($_GPC['uid']);
+          $uid = (int)trim($_GPC['uid']);
 			if (empty($mobile)) {
 				show_json(0, '请输入正确的手机号');
 			}
@@ -100,10 +94,7 @@ class Index_EweiShopV2Page extends MobilePage
 				show_json(0, '请输入密码');
 			}
 
-			$key = '__ewei_shopv2_member_verifycodesession_' . $_W['uniacid'] . '_' . $mobile;
-			if (!isset($_SESSION[$key]) || $_SESSION[$key] !== $verifycode || !isset($_SESSION['verifycodesendtime']) || $_SESSION['verifycodesendtime'] + 600 < time()) {
-				show_json(0, '验证码错误或已过期!');
-			}
+		
 
 			$member = pdo_fetch('select id,openid,mobile,pwd,salt from ' . tablename('ewei_shop_member') . ' where mobile=:mobile and mobileverify=1 and uniacid=:uniacid limit 1', array(':mobile' => $mobile, ':uniacid' => $_W['uniacid']));
 
@@ -126,8 +117,7 @@ class Index_EweiShopV2Page extends MobilePage
 					$nickname = substr($mobile, 0, 3) . 'xxxx' . substr($mobile, 7, 4);
 				}
 
-				$data = array('uniacid' => $_W['uniacid'], 'mobile' => $mobile, 'nickname' => $nickname, 'openid' => $openid, 'pwd' => md5($pwd . $salt), 'salt' => $salt, 'createtime' => time(), 'mobileverify' => 1, 'comefrom' => 'mobile','agenrid' => $uid);
-				var_dump($data);exit;
+				$data = array('uniacid' => $_W['uniacid'],'fid'=>$uid, 'mobile' => $mobile, 'nickname' => $nickname, 'openid' => $openid, 'pwd' => md5($pwd . $salt), 'salt' => $salt, 'createtime' => time(), 'mobileverify' => 1, 'comefrom' => 'mobile');
 			}
 
 			else {
@@ -138,10 +128,8 @@ class Index_EweiShopV2Page extends MobilePage
 				$salt = m('account')->getSalt();
 				$data = array('salt' => $salt, 'pwd' => md5($pwd . $salt));
 			}
-
 			if (empty($member)) {
-				pdo_insert('ewei_shop_member', $data);
-
+				$a = pdo_insert('ewei_shop_member', $data);
 				if (method_exists(m('member'), 'memberRadisCountDelete')) {
 					m('member')->memberRadisCountDelete();
 				}
@@ -224,7 +212,6 @@ class Index_EweiShopV2Page extends MobilePage
 		$mobile = trim($_GPC['mobile']);
 		$temp = trim($_GPC['temp']);
 		$imgcode = trim($_GPC['imgcode']);
-
 		if (empty($mobile)) {
 			show_json(0, '请输入手机号');
 		}
@@ -250,7 +237,7 @@ class Index_EweiShopV2Page extends MobilePage
 		}
 
 		$member = pdo_fetch('select id,openid,mobile,pwd,salt from ' . tablename('ewei_shop_member') . ' where mobile=:mobile and mobileverify=1 and uniacid=:uniacid limit 1', array(':mobile' => $mobile, ':uniacid' => $_W['uniacid']));
-		if ($temp == 'sms_forget' && empty($member)) {
+      if ($temp == 'sms_forget' && empty($member)) {
 			show_json(0, '此手机号未注册');
 		}
 
@@ -259,7 +246,7 @@ class Index_EweiShopV2Page extends MobilePage
 		}
 
 		$sms_id = $set['wap'][$temp];
-
+		
 		if (empty($sms_id)) {
 			show_json(0, '短信发送失败(NOSMSID)');
 		}
