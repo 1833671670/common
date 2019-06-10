@@ -72,7 +72,7 @@
         <?php  } ?>
         <?php  if($_W['role'] == 'founder') { ?>
         <li>
-            <a href="<?php  echo webUrl('system')?>" >
+            <a href >
                 <i class="icow icow-qiehuan" style="margin-right: 10px;color: #f34347"></i>系统管理
             </a>
         </li>
@@ -167,19 +167,7 @@
                 <?php  } } ?>
             </li>
             <?php  } else { ?>
-            <li class="sysset">
-                <i class="icow icow-qiehuan"></i>
 
-                <span class="wb-nav-title" data-href="">系统管理</span>
-                <div class="syssetsub">
-                    <div class="syssettitle">系统管理</div>
-                    <a href="<?php  echo webUrl('system/plugin')?>"><i class="icow icow-plugins "></i>应用</a>
-                    <a href="<?php  echo webUrl('system/copyright')?>"><i class="icow icow-banquan"></i>版权</a>
-                    <a href="<?php  echo webUrl('system/data')?>"><i class="icow icow-statistics"></i>数据</a>
-                    <a href="<?php  echo webUrl('system/site')?>"><i class="icow icow-wangzhan"></i>网站</a>
-                    <span class="syssettips"></span>
-                </div>
-            </li>
             <?php  } ?>
             <?php  } ?>
         </ul>
