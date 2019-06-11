@@ -200,9 +200,15 @@ class Index_EweiShopV2Page extends MobileLoginPage
 			}
 		}
 		// 今日收入
-
+		$today = pdo_fetchall("select * from `ims_ewei_shop_commission_list` where getcomid =" . $member['id'] . " and create_time between ". strtotime(date('Y-m-d', time())) ." and ". $time);
+		foreach ($today as $v) {
+			$today['sum'] += $v['commission'];
+		}
 		// 累计收入
-
+		$all_day = pdo_getall('ewei_shop_commission_list', ['getcomid' => $member['id']]);
+		foreach ($all_day as $v) {
+			$all_day['sum'] += $v['commission'];
+		}
 		include($this->template());
 	}
 }
