@@ -24,9 +24,10 @@ class Withdraw_EweiShopV2Page extends MobileLoginPage
 		$member = pdo_get('ewei_shop_member', ['openid' => $_W['openid']]);
 		if ($price > $member['credit2']) exit(show_json(0, ['msg' => '提现金额不可大于余额']));
 		$res = pdo_insert('ewei_shop_withdraw', [
-			'uid' => $member['id'],
-			'price' => $price,
-			'status' => 1,
+			'uid'         => $member['id'],
+			'price'       => $price,
+			'charge'      => $price * 0.05,
+			'status'      => 1,
 			'create_time' => time()
 		]);
 		if (!$res) exit(show_json(0, ['msg' => '提现失败']));
