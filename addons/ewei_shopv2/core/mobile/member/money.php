@@ -29,12 +29,23 @@ class Money_EweiShopV2Page extends MobileLoginPage
 		// 奖金记录
 		if ($status == 1) {
 			$list = pdo_getall('ewei_shop_commission_list', ['getcomid' => $member['id']]);
+			$status_arr = [
+				1 => '分享奖',
+				2 => '管理奖',
+				3 => '团队奖',
+				4 => '推广奖',
+				5 => '区域奖'
+			];
 			foreach ($list as &$v) {
-				$v['uid'] = $member_list_arr[$v['uid']];
+				if ($v['status'] == 3) {
+					$v['uid'] = '下级团队';
+				} else {
+					$v['uid'] = $member_list_arr[$v['uid']];
+				}
 				$v['getcomid'] = $member_list_arr[$v['getcomid']];
 				$v['create_time'] = date('Y-m-d', $v['create_time']);
+				$v['status'] = $status_arr[$v['status']];
 			}
-			dump($list);
 		}
 		// 转账记录
 		if ($status == 2) {

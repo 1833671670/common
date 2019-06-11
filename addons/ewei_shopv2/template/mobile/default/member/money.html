@@ -23,6 +23,13 @@
 	.container2 li div:last-child {
 		margin-right: 0;
 	}
+	
+	.container1 li  {
+		border-radius: 0.2rem;
+		padding: 0.2rem 0.3rem;
+		margin: 0.5rem 0;
+		background: #fff;
+	}
 </style>
 <div class='fui-page  fui-page-current coupon-my-page'>
 	<div class="fui-header">
@@ -38,17 +45,7 @@
 			<a id="tab2">转账记录</a>
 		</div>
 		<ul class="container1"  id="con">
-			<li>
-				<div>收款对象：
-					<sapn>181786867</sapn>
-				</div>
-				<div>转账金额：
-					<sapn>10.00</sapn>
-				</div>
-				<div>转账时间：
-					<sapn>2018-01-01</sapn>
-				</div>
-			</li>
+
 		</ul>
 		{template '_copyright'}
 	</div>
@@ -56,6 +53,7 @@
 		$(function () {
 			$('#tab1').trigger("click");
 			$('#tab1').click(function () {
+				$('.container1').html('');
 				var status = 1;
 				$(this).attr('class', 'active');
 				$('#tab2').removeAttr('class');
@@ -68,20 +66,30 @@
 					},
 					dataType: 'json',
 					success: function (data) {
-						$('.container').html('');
 						var html = '';
 						$.each(data.result.data, function (k, v) {
 							html += "<li>" +
-								"<div>收款对象：<sapn>" + v.payee + "</sapn></div>" +
-								"<div>转账金额：<sapn>" + v.price + "</sapn></div>" +
-								"<div>转账时间：<sapn>" + v.create_time + "</sapn></div>" +
+								"<div>奖金来源：" +
+								"<sapn>" + v.uid + "</sapn>" +
+								"</div>" +
+								"<div>奖金金额：" +
+								"<sapn>" + v.commission + "</sapn>" +
+								"</div>" +
+								"<div>奖金类型：" +
+								"<sapn>" + v.status + "</sapn>" +
+								"</div>" +
+								"<div>产生时间：" +
+								"<sapn>" + v.create_time + "</sapn>" +
+								"</div>" +
 								"</li>";
 						});
-						$('.container').html(html);
+						$('.container1').html(html);
 					}
-				})
+				});
+				return;
 			});
 			$('#tab2').click(function () {
+				$('.container2').html('');
 				var status = 2;
 				$(this).attr('class', 'active');
 				$('#tab1').removeAttr('class');
@@ -94,7 +102,6 @@
 					},
 					dataType: 'json',
 					success: function (data) {
-						$('.container2').html('');
 						var html = '';
 						$.each(data.result.data, function (k, v) {
 							html += "<li>" +
@@ -105,7 +112,8 @@
 						});
 						$('.container2').html(html);
 					}
-				})
+				});
+				return;
 			});
 		});
 	</script>
