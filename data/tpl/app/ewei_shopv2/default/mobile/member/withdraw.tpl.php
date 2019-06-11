@@ -1,4 +1,4 @@
-{template '_header'}
+<?php defined('IN_IA') or exit('Access Denied');?><?php (!empty($this) && $this instanceof WeModuleSite) ? (include $this->template('_header', TEMPLATE_INCLUDEPATH)) : (include template('_header', TEMPLATE_INCLUDEPATH));?>
 <div class='fui-page  fui-page-current member-cart-page'>
 	<div class="fui-header">
 		<div class="fui-header-left">
@@ -9,7 +9,7 @@
 	<div class='fui-content navbar cart-list' style="bottom: 4.9rem">
 		<div id="cart_container">
 			<form class='form-ajax'>
-				<input type='hidden' id='addressid' value="{$address['id']}"/>
+				<input type='hidden' id='addressid' value="<?php  echo $address['id'];?>"/>
 				<div class='fui-cell-group'>
 					<div class='fui-cell'>
 						<div class='fui-cell-label'>提现金额</div>
@@ -23,7 +23,7 @@
 		</div>
 	</div>
 	<div id="footer_container"></div>
-	{php $this->footerMenus()}
+	<?php  $this->footerMenus()?>
 </div>
 <script>
 	$(function () {
@@ -35,7 +35,7 @@
 			}
 			$.ajax({
 				type : 'post',
-				url : '{php echo mobileUrl("member/withdraw/withdraw")}',
+				url : '<?php  echo mobileUrl("member/withdraw/withdraw")?>',
 				data : {
 					price : price
 				},
@@ -51,4 +51,4 @@
 		})
 	})
 </script>
-{template '_footer'}
+<?php (!empty($this) && $this instanceof WeModuleSite) ? (include $this->template('_footer', TEMPLATE_INCLUDEPATH)) : (include template('_footer', TEMPLATE_INCLUDEPATH));?>

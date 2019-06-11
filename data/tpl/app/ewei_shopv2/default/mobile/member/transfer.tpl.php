@@ -8,7 +8,7 @@
 	</div>
 	<div class='fui-content navbar cart-list' style="bottom: 4.9rem">
 		<div id="cart_container">
-			<form method='post' class='form-ajax'>
+			<form class='form-ajax'>
 				<input type='hidden' id='addressid' value="<?php  echo $address['id'];?>"/>
 				<div class='fui-cell-group'>
 					<div class='fui-cell'>
@@ -23,7 +23,7 @@
 							<input type="number" id='price' name='price' placeholder="请填写转账金额" class="fui-input"/>
 						</div>
 					</div>
-					<a id="btn-submit" class='external btn btn-danger block' style="margin-top:1.25rem">确认转账</a>
+					<a id="btn-submit" href="javascript:;" class='external btn btn-danger block' style="margin-top:1.25rem">确认转账</a>
 				</div>
 			</form>
 		</div>
@@ -34,6 +34,7 @@
 <script>
 	$(function () {
 		$('#btn-submit').click(function () {
+			$(this).unbind('click');
 			var mobile = $('#mobile').val();
 			var price = $('#price').val();
 			var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
