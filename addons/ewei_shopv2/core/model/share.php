@@ -61,12 +61,15 @@ class Share_EweiShopV2Model
         if($level == 0){
             return false;
         }else{
-            $price = pdo_get("ewei_shop_order",array('id'=>$orderid),array('price'));
+            $price = pdo_get("ewei_shop_order",array('id'=>$orderid),array('price','id'));
             $memberMLevel = pdo_get("ewei_shop_member_level",array('id'=>$member['level']),array('level'));
             //判断自身的消费金额和父级总消费金额的大小进行比较
             $priceAll = $this->getFPriceAll($member['fid']); //获取父级消费总额
             if($price['price'] <= $priceAll){
+
                 return $price['price'] * 0.4;
+
+
             }else{
                 //如果自身消费金额比父级总消费金额大，佣金比例为父级总消费金额的40%
                 return $priceAll * 0.4;
@@ -183,6 +186,7 @@ class Share_EweiShopV2Model
     //递归id
     public  function  digui($uid){
         static $id = [];
+        $id[] = $uid;
         $f_member = pdo_getall('ewei_shop_member',array('fid'=>$uid),array('id','fid'));
         foreach ($f_member as $k=>$v){
             $id[] = $v['id'];
@@ -194,8 +198,123 @@ class Share_EweiShopV2Model
                }
            }
         }
-        $id[] = $uid;
-        return $id;
+
+        return array_unique($id);
     }
+
+    //获取用户所属团队订单的总额
+    public function getTeamPerformance($uid, $openid)
+    {
+        static $my_Performances = 0;
+        $my_Performance = pdo_getall('ewei_shop_order', array('openid' => $openid,'status'=>3), array('price'));
+        foreach ($my_Performance as $k1=>$v2){
+            $my_Performances += $v2['price'];
+        }
+        $subordinate = pdo_getall('ewei_shop_member', array('fid' => $uid), array('id', 'openid'));
+        foreach ($subordinate as $k => $v) {
+            $price = pdo_getall('ewei_shop_order', array('openid' => $v['openid'],'status'=>3), array('price'));
+            foreach ($price as $k2=>$v3){
+                $my_Performances += $v3['price'];
+            }
+            $aa = pdo_getall('ewei_shop_member', array('fid' => $v['id']), array('id', 'openid'));
+            if (count($aa) > 0) {
+                foreach ($aa as $key => $value) {
+                    $this->getTeamPerformance($value['id'], $value['openid']);
+                }
+            }
+        }
+        return $my_Performances;
+    }
+
+    public function caseSwitch($uid,$openid){
+        $my_Performances = $this->getTeamPerformance($uid,$openid);
+
+        switch(true){
+            case "$my_Performances < 300":
+                break;
+            case "$my_Performances <60000 && $my_Performances >= 300":
+                $ids = pdo_getall("ewei_shop_member",array('fid'=>$uid),array('id','openid'));
+                foreach ($ids as $k=>$v){
+                    if($v['id']){
+                        $vid = $v['id'];
+                      return [ "$vid" => $this->caseSwitch($v['id'],$v['openid'])];
+                    }
+                }
+                break;
+            case "$my_Performances <120000 && $my_Performances >= 60000":
+                $ids = pdo_getall("ewei_shop_member",array('fid'=>$uid),array('id','openid'));
+                foreach ($ids as $k=>$v){
+                    if($v['id']){
+                        $vid = $v['id'];
+                        return [ "$vid" => $this->caseSwitch($v['id'],$v['openid'])];
+                    }
+                }
+                break;
+            case "$my_Performances <300000 && $my_Performances >= 120000":
+                $ids = pdo_getall("ewei_shop_member",array('fid'=>$uid),array('id','openid'));
+                foreach ($ids as $k=>$v){
+                    if($v['id']){
+                        $vid = $v['id'];
+                        return [ "$vid" => $this->caseSwitch($v['id'],$v['openid'])];
+                    }
+                }
+                break;
+            case "$my_Performances <600000 && $my_Performances >= 300000":
+                $ids = pdo_getall("ewei_shop_member",array('fid'=>$uid),array('id','openid'));
+                foreach ($ids as $k=>$v){
+                    if($v['id']){
+                        $vid = $v['id'];
+                        return [ "$vid" => $this->caseSwitch($v['id'],$v['openid'])];
+                    }
+                }
+                break;
+            case "$my_Performances <1200000 && $my_Performances >= 600000":
+                $ids = pdo_getall("ewei_shop_member",array('fid'=>$uid),array('id','openid'));
+                foreach ($ids as $k=>$v){
+                    if($v['id']){
+                        $vid = $v['id'];
+                        return [ "$vid" => $this->caseSwitch($v['id'],$v['openid'])];
+                    }
+                }
+                break;
+            case "$my_Performances <3000000 && $my_Performances >= 1200000":
+                $ids = pdo_getall("ewei_shop_member",array('fid'=>$uid),array('id','openid'));
+                foreach ($ids as $k=>$v){
+                    if($v['id']){
+                        $vid = $v['id'];
+                        return [ "$vid" => $this->caseSwitch($v['id'],$v['openid'])];
+                    }
+                }
+                break;
+            case "$my_Performances <6000000 && $my_Performances >= 3000000":
+                $ids = pdo_getall("ewei_shop_member",array('fid'=>$uid),array('id','openid'));
+                foreach ($ids as $k=>$v){
+                    if($v['id']){
+                        $vid = $v['id'];
+                        return [ "$vid" => $this->caseSwitch($v['id'],$v['openid'])];
+                    }
+                }
+                break;
+            case "$my_Performances <12000000 && $my_Performances >= 6000000":
+                $ids = pdo_getall("ewei_shop_member",array('fid'=>$uid),array('id','openid'));
+                foreach ($ids as $k=>$v){
+                    if($v['id']){
+                        $vid = $v['id'];
+                        return [ "$vid" => $this->caseSwitch($v['id'],$v['openid'])];
+                    }
+                }
+                break;
+            case "$my_Performances >= 12000000":
+                $ids = pdo_getall("ewei_shop_member",array('fid'=>$uid),array('id','openid'));
+                foreach ($ids as $k=>$v){
+                    if($v['id']){
+                        $vid = $v['id'];
+                        return [ "$vid" => $this->caseSwitch($v['id'],$v['openid'])];
+                    }
+                }
+                break;
+        }
+    }
+
 }
 ?>
