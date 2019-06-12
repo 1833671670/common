@@ -75,9 +75,10 @@ class Op_EweiShopV2Page extends MobileLoginPage
         $order = pdo_fetch("select id,status,openid,couponid,price,refundstate,refundid,ordersn,price from " . tablename("ewei_shop_order") . " where id=:id and uniacid=:uniacid and openid=:openid limit 1", array( ":id" => $orderid, ":uniacid" => $_W["uniacid"], ":openid" => $_W["openid"] ));
 
         $item = pdo_get('ewei_shop_order_goods',array('orderid'=>$orderid,'uniacid'=>$_W['uniacid']),array('goodsid','total'));
-        $item1 = pdo_get('ewei_shop_goods',array('id'=>$item['goodsid']),array('good_inte'));
+        $item1 = pdo_get('ewei_shop_goods',array('id'=>$item['goodsid']),array('good_inte','wholesale','promotion'));
         $finalinte = $item1['good_inte'] * $item['total']; //积分
         $member = m("member")->getMember($_W["openid"], true);
+
         $good_inte = $finalinte + $member['credit1'];
         $grade = m('share')->getMemberGrade($member['fid']);
         //分享奖佣金
@@ -104,6 +105,18 @@ class Op_EweiShopV2Page extends MobileLoginPage
         pdo_update("ewei_shop_order", array( "status" => 3, "finishtime" => time(), "refundstate" => 0 ), array( "id" => $order["id"], "uniacid" => $_W["uniacid"] ));
         //修改积分
         pdo_update("ewei_shop_member",array("credit1"=>$good_inte),array('id'=>$member['id']));
+        //进货区额外奖励推荐人10%
+        if($item1['wholesale']){
+            $cr = pdo_get("ewei_shop_member",array('id'=>$member['fid']),array('credit2'));
+            $credit = $cr['credit2'] + $order['price'] * 0.1;
+            pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+        }
+        //促销去额外奖励推荐人10%
+        if($item1['promotion']){
+            $cr = pdo_get("ewei_shop_member",array('id'=>$member['fid']),array('credit2'));
+            $credit = $cr['credit2'] + $order['price'] * 0.1;
+            pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+        }
         //添加佣金记录
         //分享
         if($shareCommission){
