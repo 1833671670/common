@@ -66,11 +66,18 @@
             <p>已有帐号? <a href="{$set['wap']['loginurl']}">立即登录</a></p>
         </div>
 
-        <script language='javascript'>
-            require(['biz/member/account'], function (modal) {
-                modal.initRf({backurl:'{$backurl}', type: {php echo intval($type)}, endtime: {php echo intval($endtime)}, imgcode: {php echo intval($set['wap']['smsimgcode'])}});
-            });
-        </script>
+	    <script language='javascript'>
+		    require(['biz/member/account'], function (modal) {
+			    modal.initRf({
+				    backurl: '{$backurl}',
+				    type: {php echo intval($type)},
+				    endtime: {php echo intval($endtime)},
+				    imgcode: {php echo intval($set['wap']['smsimgcode'])
+		    }
+		    })
+			    ;
+		    });
+	    </script>
     </div>
 </div>
 {template '_footer'}
