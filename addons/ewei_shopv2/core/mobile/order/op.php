@@ -72,7 +72,7 @@ class Op_EweiShopV2Page extends MobileLoginPage
         global $_W;
         global $_GPC;
         $orderid = intval($_GPC["id"]);
-        $order = pdo_fetch("select id,status,openid,couponid,price,refundstate,refundid,ordersn,price from " . tablename("ewei_shop_order") . " where id=:id and uniacid=:uniacid and openid=:openid limit 1", array( ":id" => $orderid, ":uniacid" => $_W["uniacid"], ":openid" => $_W["openid"] ));
+        $order = pdo_fetch("select id,status,address,openid,couponid,price,refundstate,refundid,ordersn,price from " . tablename("ewei_shop_order") . " where id=:id and uniacid=:uniacid and openid=:openid limit 1", array( ":id" => $orderid, ":uniacid" => $_W["uniacid"], ":openid" => $_W["openid"] ));
 
         $item = pdo_get('ewei_shop_order_goods',array('orderid'=>$orderid,'uniacid'=>$_W['uniacid']),array('goodsid','total'));
         $item1 = pdo_get('ewei_shop_goods',array('id'=>$item['goodsid']),array('good_inte','wholesale','promotion'));
@@ -106,26 +106,88 @@ class Op_EweiShopV2Page extends MobileLoginPage
         //修改积分
         pdo_update("ewei_shop_member",array("credit1"=>$good_inte),array('id'=>$member['id']));
         //进货区额外奖励推荐人10%
+
+        //address保存的数据为反序列化，使用unserialize()函数进行序列化操作
+        $pca = unserialize($order['address']);
+        $province = $pca['province']; //订单省
+        $city = $pca['city'];//订单市
+        $area = $pca['area'];//订单区
+        $cr = pdo_get("ewei_shop_member",array('id'=>$member['fid']),array('credit2'));
+        if(!$item1['wholesale']) {
+            $pagency = pdo_get("agency_area", array('address' => $province), array('id', 'proportion'));
+            if ($pagency) {
+                $ppid = pdo_get("ewei_shop_member", array('is_agency' => $pagency['id']), array('id'));
+                pdo_insert("ewei_shop_commission_list", array('uid' => $member['id'], 'getcomid' => $ppid['id'], 'commission' => $order['price'] * 0.02, 'status' => 7, 'create_time' => time()));
+                $credit = $cr['credit2'] + $order['price'] * 0.02;
+                pdo_update("ewei_shop_member", array('credit2' => $credit), array('id' => $member['fid']));
+            }
+            $cagency = pdo_get("agency_area", array('address' => $city), array('id', 'proportion'));
+            if ($cagency) {
+                $pcid = pdo_get("ewei_shop_member", array('is_agency' => $cagency['id']), array('id'));
+                pdo_insert("ewei_shop_commission_list", array('uid' => $member['id'], 'getcomid' => $pcid['id'], 'commission' => $order['price'] * 0.03, 'status' => 7, 'create_time' => time()));
+                $credit = $cr['credit2'] + $order['price'] * 0.03;
+                pdo_update("ewei_shop_member", array('credit2' => $credit), array('id' => $member['fid']));
+            }
+            $aagency = pdo_get("agency_area", array('address' => $area), array('id', 'proportion'));
+            if ($aagency) {
+                $paid = pdo_get("ewei_shop_member", array('is_agency' => $aagency['id']), array('id'));
+                pdo_insert("ewei_shop_commission_list", array('uid' => $member['id'], 'getcomid' => $paid['id'], 'commission' => $order['price'] * 0.05, 'status' => 7, 'create_time' => time()));
+                $credit = $cr['credit2'] + $order['price'] * 0.05;
+                pdo_update("ewei_shop_member", array('credit2' => $credit), array('id' => $member['fid']));
+            }
+        }
         if($item1['wholesale']){
-            $cr = pdo_get("ewei_shop_member",array('id'=>$member['fid']),array('credit2'));
-            $credit = $cr['credit2'] + $order['price'] * 0.1;
-            pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+            $pagency = pdo_get("agency_area",array('address'=>$province),array('id','proportion'));
+            if($pagency){
+                $ppid = pdo_get("ewei_shop_member",array('is_agency'=>$pagency['id']),array('id'));
+                pdo_insert("ewei_shop_commission_list",array('uid'=>$member['id'],'getcomid'=>$ppid['id'],'commission'=>$order['price'] * $pagency['proportion'] * 0.01,'status'=>7,'create_time'=>time()));
+                $credit = $cr['credit2'] + $order['price'] * $pagency['proportion']* 0.01;
+                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+            }
+            $cagency = pdo_get("agency_area",array('address'=>$city),array('id','proportion'));
+            if($cagency){
+                $pcid = pdo_get("ewei_shop_member",array('is_agency'=>$cagency['id']),array('id'));
+                pdo_insert("ewei_shop_commission_list",array('uid'=>$member['id'],'getcomid'=>$pcid['id'],'commission'=>$order['price'] * $cagency['proportion']* 0.01,'status'=>7,'create_time'=>time()));
+                $credit = $cr['credit2'] + $order['price'] * $cagency['proportion']* 0.01;
+                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+            }
+            $aagency = pdo_get("agency_area",array('address'=>$area),array('id','proportion'));
+            if($aagency){
+                $paid = pdo_get("ewei_shop_member",array('is_agency'=>$aagency['id']),array('id'));
+                pdo_insert("ewei_shop_commission_list",array('uid'=>$member['id'],'getcomid'=>$paid['id'],'commission'=>$order['price'] * $aagency['proportion']* 0.01,'status'=>7,'create_time'=>time()));
+                $credit = $cr['credit2'] + $order['price'] * $aagency['proportion']* 0.01;
+                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+            }
+            if($member['fid'] != 0){
+                pdo_insert("ewei_shop_commission_list",array('uid'=>$member['id'],'getcomid'=>$member['fid'],'commission'=>$order['price'] * 0.1,'status'=>6,'create_time'=>time()));
+                $credit = $cr['credit2'] + $order['price'] * 0.1;
+                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+            }
         }
         //促销去额外奖励推荐人10%
         if($item1['promotion']){
-            $cr = pdo_get("ewei_shop_member",array('id'=>$member['fid']),array('credit2'));
-            $credit = $cr['credit2'] + $order['price'] * 0.1;
-            pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+            if($member['fid'] != 0){
+                $cr = pdo_get("ewei_shop_member",array('id'=>$member['fid']),array('credit2','is_league'));
+                pdo_insert("ewei_shop_commission_list",array('uid'=>$member['id'],'getcomid'=>$member['fid'],'commission'=>$order['price'] * 0.1,'status'=>6,'create_time'=>time()));
+                if($cr['is_league']){
+                    $credit = $cr['credit2'] + $order['price'] * 0.2;
+                }else{
+                    $credit = $cr['credit2'] + $order['price'] * 0.1;
+                }
+                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+            }
         }
         //添加佣金记录
         //分享
         if($shareCommission){
-            //添加到佣金记录表中
-            pdo_insert("ewei_shop_commission_list",array('uid'=>$member['id'],'getcomid'=>$member['fid'],'commission'=>$shareCommission,'status'=>1,'create_time'=>time()));
-            //修改member表中佣金数据
-            $cr = pdo_get("ewei_shop_member",array('id'=>$member['fid']),array('credit2'));
-            $credit = $cr['credit2'] + $shareCommission;
-            pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+            if($member['fid'] != 0){
+                //添加到佣金记录表中
+                pdo_insert("ewei_shop_commission_list",array('uid'=>$member['id'],'getcomid'=>$member['fid'],'commission'=>$shareCommission,'status'=>1,'create_time'=>time()));
+                //修改member表中佣金数据
+                $cr = pdo_get("ewei_shop_member",array('id'=>$member['fid']),array('credit2'));
+                $credit = $cr['credit2'] + $shareCommission;
+                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+            }
         }
         //管理2代
         if($manageCommission['grade2Commission']){
