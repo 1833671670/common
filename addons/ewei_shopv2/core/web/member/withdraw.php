@@ -13,7 +13,7 @@ class Withdraw_EweiShopV2Page extends WebPage
 		$pindex = max(1, intval($_GPC["page"]));
 		$psize = 20;
 		$total = count(pdo_getall('ewei_shop_withdraw'));
-		$list = pdo_getall('ewei_shop_withdraw', '', '', '', '', [$start_page, 20]);
+		$list = pdo_getall('ewei_shop_withdraw', '', '', '', 'status ASC', [$start_page, 20]);
 		$member_list = pdo_getall('ewei_shop_member');
 		$mobile = [];
 		foreach ($member_list as $v) {
@@ -43,10 +43,10 @@ class Withdraw_EweiShopV2Page extends WebPage
 		$res2 = pdo_update('ewei_shop_member', ['credit2' => $member_credit2], ['id' => $id]);
 		if (!$res1 || !$res2) {
 			pdo_fetchall('ROLLBACK');//事务回滚
-			exit(show_json(0, ['msg' => '请求失败']));
+			$this->message('请求失败');
 		}
 		pdo_fetchall('COMMIT');//事务提交
-		exit(show_json(1, ['msg' => '请求成功']));
+		$this->message('请求成功', webUrl('member/withdraw'));
 	}
 
 	/**
