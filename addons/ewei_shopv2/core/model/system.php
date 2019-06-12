@@ -666,11 +666,21 @@ class System_EweiShopV2Model {
                         "route" => "level"
                     ) ,
                     array(
-                        "title" => "代理规则",
-                        "route" => "levelRule"
-                    ) ,
+                        "title" => "代理设置",
+                        "route" => "",
+                        "items" => array(
+                            array(
+                                "title" => "代理列表",
+                                "route" => "agency"
+                            ) ,
+                            array(
+                                "title" => "代理区域",
+                                "route" => "area"
+                            )
+                        )
+                    ),
                     array(
-                        "title" => "股东列表",
+                        "title" => "加盟列表",
                         "route" => "shareholder"
                     ),
                     array(
