@@ -50,42 +50,45 @@
 		{template '_copyright'}
 	</div>
 	<script>
+		function money_list () {
+			$('.container1').html('');
+			var status = 1;
+			$('#tab1').attr('class', 'active');
+			$('#tab2').removeAttr('class');
+			$('#con').attr('class', 'container1');
+			$.ajax({
+				type: 'post',
+				url: '{php echo mobileUrl("member/money/details")}',
+				data: {
+					status: status
+				},
+				dataType: 'json',
+				success: function (data) {
+					var html = '';
+					$.each(data.result.data, function (k, v) {
+						html += "<li>" +
+							"<div>奖金来源：" +
+							"<sapn>" + v.uid + "</sapn>" +
+							"</div>" +
+							"<div>奖金金额：" +
+							"<sapn>" + v.commission + "</sapn>" +
+							"</div>" +
+							"<div>奖金类型：" +
+							"<sapn>" + v.status + "</sapn>" +
+							"</div>" +
+							"<div>产生时间：" +
+							"<sapn>" + v.create_time + "</sapn>" +
+							"</div>" +
+							"</li>";
+					});
+					$('.container1').html(html);
+				}
+			});
+		}
 		$(function () {
-			$('#tab1').trigger("click");
+			money_list();
 			$('#tab1').click(function () {
-				$('.container1').html('');
-				var status = 1;
-				$(this).attr('class', 'active');
-				$('#tab2').removeAttr('class');
-				$('#con').attr('class', 'container1');
-				$.ajax({
-					type: 'post',
-					url: '{php echo mobileUrl("member/money/details")}',
-					data: {
-						status: status
-					},
-					dataType: 'json',
-					success: function (data) {
-						var html = '';
-						$.each(data.result.data, function (k, v) {
-							html += "<li>" +
-								"<div>奖金来源：" +
-								"<sapn>" + v.uid + "</sapn>" +
-								"</div>" +
-								"<div>奖金金额：" +
-								"<sapn>" + v.commission + "</sapn>" +
-								"</div>" +
-								"<div>奖金类型：" +
-								"<sapn>" + v.status + "</sapn>" +
-								"</div>" +
-								"<div>产生时间：" +
-								"<sapn>" + v.create_time + "</sapn>" +
-								"</div>" +
-								"</li>";
-						});
-						$('.container1').html(html);
-					}
-				});
+				money_list();
 				return;
 			});
 			$('#tab2').click(function () {

@@ -1,5 +1,5 @@
 {template '_header'}
-<div class="page-header">当前位置：<span class="text-primary">会员等级管理</span></div>
+<div class="page-header">当前位置：<span class="text-primary">会员提现管理</span></div>
 <div class="page-content">
 	<form action="./index.php" method="get" class="form-horizontal form-search" role="form">
 		<input type="hidden" name="c" value="site"/>
@@ -29,10 +29,9 @@
 			<thead>
 			<tr>
 				<th style="width:16%;">id</th>
-				<th style="width:16%;">转账人</th>
-				<th style="width:16%;">收款人</th>
-				<th style="width:16%;">转账金额</th>
-				<th style="width:16%;">时间</th>
+				<th style="width:16%;">提现人</th>
+				<th style="width:16%;">提现金额</th>
+				<th style="width:16%;">提现时间</th>
 				<th style="width: 20%;">操作</th>
 			</tr>
 			</thead>
@@ -40,14 +39,21 @@
 			{loop $list $v}
 			<tr>
 				<td>{$v['id']}</td>
-				<td>{$mobile[$v['transferor']]}</td>
-				<td>{$mobile[$v['payee']]}</td>
+				<td>{$mobile[$v['uid']]}</td>
 				<td>{$v['price']}</td>
 				<td>{php echo date('Y-m-d', $v['create_time'])}</td>
 				<td>
-					{ifp 'member.transfer.del'}
+					{ifp 'member.withdraw.pass'}
+					<a class="btn  btn-op btn-operation" data-toggle="ajaxModal"
+					   href="{php echo webUrl('member/withdraw/pass', array('id' => $v['id']))}" title="">
+						<span data-toggle="tooltip" data-placement="top" title="" data-original-title="提现审核">
+							<i class="icow icow-31"></i>
+						</span>
+					</a>
+					{/if}
+					{ifp 'member.withdraw.del'}
 					<a data-toggle='ajaxRemove'
-					   href="{php echo webUrl('member/transfer/del', array('id' => $v['id']))}"
+					   href="{php echo webUrl('member/withdraw/del', array('id' => $v['id']))}"
 					   class="btn btn-op btn-operation" data-confirm='确认要删除此条记录吗?'>
 					<span data-toggle="tooltip" data-placement="top" data-original-title="删除">
 						<i class='icow icow-shanchu1'></i>

@@ -22,4 +22,21 @@ class Transfer_EweiShopV2Page extends WebPage
 		$pager = pagination2($total, $pindex, $psize);
 		include $this->template();
 	}
+
+	/**
+	 * 删除
+	 */
+	public function del()
+	{
+		global $_W;
+		global $_GPC;
+		$id = intval($_GPC['id']);
+
+		if (empty($id)) {
+			$id = is_array($_GPC['ids']) ? implode(',', $_GPC['ids']) : 0;
+		}
+		$res = pdo_delete('ewei_shop_member_transfer', ['id' => $id]);
+		if (!$res) exit(show_json(0, ['msg' => '删除失败']));
+		exit(show_json(1, ['msg' => '删除成功']));
+	}
 }

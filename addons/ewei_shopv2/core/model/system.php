@@ -680,6 +680,10 @@ class System_EweiShopV2Model {
                     array(
                         "title" => "转账记录",
                         "route" => "transfer"
+                    ),
+                    array(
+                        "title" => "提现管理",
+                        "route" => "withdraw"
                     )
                 )
             ) ,
