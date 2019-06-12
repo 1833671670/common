@@ -38,14 +38,14 @@
 			<tbody>
 			<?php  if(is_array($list)) { foreach($list as $v) { ?>
 			<tr>
-				<td><?php  echo $v['id'];?></td>
+				<td id="withdraw_id"><?php  echo $v['id'];?></td>
 				<td><?php  echo $mobile[$v['uid']];?></td>
 				<td><?php  echo $v['price'];?></td>
 				<td><?php  echo date('Y-m-d', $v['create_time'])?></td>
 				<td>
-					<?php if(cv('member.withdraw.pass')) { ?>
-					<a class="btn  btn-op btn-operation" data-toggle="ajaxModal"
-					   href="<?php  echo webUrl('member/withdraw/pass', array('id' => $v['id']))?>" title="">
+					<?php if(cv('member.withdraw.pass' && $v['status'] == 1)) { ?>
+					<a class="btn btn-op btn-operation" id="withdraw"
+					   href="<?php  echo webUrl('member/withdraw/pass', ['id' => $v['id']])?>" title="提现审核">
 						<span data-toggle="tooltip" data-placement="top" title="" data-original-title="提现审核">
 							<i class="icow icow-31"></i>
 						</span>
