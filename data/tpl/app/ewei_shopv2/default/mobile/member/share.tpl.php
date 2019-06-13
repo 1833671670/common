@@ -26,7 +26,7 @@
                     <a class="setbtn" href="<?php  echo mobileUrl('member/info')?>" data-nocache='true'><i class="icon icon-shezhi"></i></a>
                     <div class="child">
                         <div class="title">我的上级</div>
-                        <div class="num"><?php  if($member['fid'] == 0) { ?>门店<?php  } else { ?><?php  echo $fmember['nickname'];?><?php  } ?></div>
+                        <div class="num"><?php  if($member['fid'] == 0) { ?>总店<?php  } else { ?><?php  echo $fmember['nickname'];?><?php  } ?></div>
                     </div>
                     <div class="child userinfo">
                         <a href="<?php  echo mobileUrl('member/info')?>" data-nocache="true" style="color: white;">
