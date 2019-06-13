@@ -63,7 +63,89 @@ class Index_EweiShopV2Page extends MobilePage
 
     public function register()
     {
-        $this->rf(0);
+        $this->reg(0);
+    }
+    protected function reg($type)
+    {
+        global $_W;
+        global $_GPC;
+
+        if ($_W['ispost']) {
+            $mobile = trim($_GPC['mobile']);
+            $verifycode = trim($_GPC['verifycode']);
+            $pwd = trim($_GPC['pwd']);
+            $uid = trim($_GPC['uid']);
+            $uid = (int)trim($_GPC['uid']);
+            if (empty($mobile)) {
+                show_json(0, '请输入正确的手机号');
+            }
+
+            if (empty($verifycode)) {
+                show_json(0, '请输入验证码');
+            }
+
+            if (empty($pwd)) {
+                show_json(0, '请输入密码');
+            }
+
+
+            $member = pdo_fetch('select id,openid,mobile,pwd,salt from ' . tablename('ewei_shop_member') . ' where mobile=:mobile and mobileverify=1 and uniacid=:uniacid limit 1', array(':mobile' => $mobile, ':uniacid' => $_W['uniacid']));
+
+            if (empty($type)) {
+                if (!empty($member)) {
+                    show_json(0, '此手机号已注册, 请直接登录');
+                }
+
+                $salt = empty($member) ? '' : $member['salt'];
+
+                if (empty($salt)) {
+                    $salt = m('account')->getSalt();
+                }
+
+                $openid = empty($member) ? '' : $member['openid'];
+                $nickname = empty($member) ? '' : $member['nickname'];
+
+                if (empty($openid)) {
+                    $openid = 'wap_user_' . $_W['uniacid'] . '_' . $mobile;
+                    $nickname = substr($mobile, 0, 3) . 'xxxx' . substr($mobile, 7, 4);
+                }
+
+                $data = array('uniacid' => $_W['uniacid'], 'fid' => $uid, 'mobile' => $mobile, 'nickname' => $nickname, 'openid' => $openid, 'pwd' => md5($pwd . $salt), 'salt' => $salt, 'createtime' => time(), 'mobileverify' => 1, 'comefrom' => 'mobile');
+            } else {
+                if (empty($member)) {
+                    show_json(0, '此手机号未注册');
+                }
+
+                $salt = m('account')->getSalt();
+                $data = array('salt' => $salt, 'pwd' => md5($pwd . $salt));
+            }
+            if (empty($member)) {
+                $a = pdo_insert('ewei_shop_member', $data);
+                if (method_exists(m('member'), 'memberRadisCountDelete')) {
+                    m('member')->memberRadisCountDelete();
+                }
+            } else {
+                pdo_update('ewei_shop_member', $data, array('id' => $member['id']));
+            }
+
+            if (p('commission')) {
+                p('commission')->checkAgent($openid);
+            }
+
+            unset($_SESSION[$key]);
+            show_json(1, empty($type) ? '注册成功' : '密码重置成功');
+
+        }
+
+        $sendtime = $_SESSION['verifycodesendtime'];
+        if (empty($sendtime) || $sendtime + 60 < time()) {
+            $endtime = 0;
+        } else {
+            $endtime = 60 - (time() - $sendtime);
+        }
+
+        $set = $this->getWapSet();
+        include $this->template('rf', NULL, true);
     }
 
     public function forget()
