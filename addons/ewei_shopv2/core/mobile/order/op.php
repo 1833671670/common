@@ -119,44 +119,48 @@ class Op_EweiShopV2Page extends MobileLoginPage
                 $ppid = pdo_get("ewei_shop_member", array('is_agency' => $pagency['id']), array('id'));
                 pdo_insert("ewei_shop_commission_list", array('uid' => $member['id'], 'getcomid' => $ppid['id'], 'commission' => $order['price'] * 0.02, 'status' => 7, 'create_time' => time()));
                 $credit = $cr['credit2'] + $order['price'] * 0.02;
-                pdo_update("ewei_shop_member", array('credit2' => $credit), array('id' => $member['fid']));
+                pdo_update("ewei_shop_member", array('credit2' => $credit), array('id' => $ppid['id']));
             }
             $cagency = pdo_get("agency_area", array('address' => $city), array('id', 'proportion'));
             if ($cagency) {
                 $pcid = pdo_get("ewei_shop_member", array('is_agency' => $cagency['id']), array('id'));
                 pdo_insert("ewei_shop_commission_list", array('uid' => $member['id'], 'getcomid' => $pcid['id'], 'commission' => $order['price'] * 0.03, 'status' => 7, 'create_time' => time()));
                 $credit = $cr['credit2'] + $order['price'] * 0.03;
-                pdo_update("ewei_shop_member", array('credit2' => $credit), array('id' => $member['fid']));
+                pdo_update("ewei_shop_member", array('credit2' => $credit), array('id' => $pcid['id']));
             }
             $aagency = pdo_get("agency_area", array('address' => $area), array('id', 'proportion'));
             if ($aagency) {
                 $paid = pdo_get("ewei_shop_member", array('is_agency' => $aagency['id']), array('id'));
                 pdo_insert("ewei_shop_commission_list", array('uid' => $member['id'], 'getcomid' => $paid['id'], 'commission' => $order['price'] * 0.05, 'status' => 7, 'create_time' => time()));
                 $credit = $cr['credit2'] + $order['price'] * 0.05;
-                pdo_update("ewei_shop_member", array('credit2' => $credit), array('id' => $member['fid']));
+                pdo_update("ewei_shop_member", array('credit2' => $credit), array('id' => $paid['id']));
             }
-        }
-        if($item1['wholesale']){
+            if($member['fid'] != 0){
+                pdo_insert("ewei_shop_commission_list",array('uid'=>$member['id'],'getcomid'=>$member['fid'],'commission'=>$order['price'] * 0.1,'status'=>6,'create_time'=>time()));
+                $credit = $cr['credit2'] + $order['price'] * 0.1;
+                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+            }
+        } else {
             $pagency = pdo_get("agency_area",array('address'=>$province),array('id','proportion'));
             if($pagency){
                 $ppid = pdo_get("ewei_shop_member",array('is_agency'=>$pagency['id']),array('id'));
                 pdo_insert("ewei_shop_commission_list",array('uid'=>$member['id'],'getcomid'=>$ppid['id'],'commission'=>$order['price'] * $pagency['proportion'] * 0.01,'status'=>7,'create_time'=>time()));
                 $credit = $cr['credit2'] + $order['price'] * $pagency['proportion']* 0.01;
-                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$ppid['id']));
             }
             $cagency = pdo_get("agency_area",array('address'=>$city),array('id','proportion'));
             if($cagency){
                 $pcid = pdo_get("ewei_shop_member",array('is_agency'=>$cagency['id']),array('id'));
                 pdo_insert("ewei_shop_commission_list",array('uid'=>$member['id'],'getcomid'=>$pcid['id'],'commission'=>$order['price'] * $cagency['proportion']* 0.01,'status'=>7,'create_time'=>time()));
                 $credit = $cr['credit2'] + $order['price'] * $cagency['proportion']* 0.01;
-                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$pcid['id']));
             }
             $aagency = pdo_get("agency_area",array('address'=>$area),array('id','proportion'));
             if($aagency){
                 $paid = pdo_get("ewei_shop_member",array('is_agency'=>$aagency['id']),array('id'));
                 pdo_insert("ewei_shop_commission_list",array('uid'=>$member['id'],'getcomid'=>$paid['id'],'commission'=>$order['price'] * $aagency['proportion']* 0.01,'status'=>7,'create_time'=>time()));
                 $credit = $cr['credit2'] + $order['price'] * $aagency['proportion']* 0.01;
-                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$member['fid']));
+                pdo_update("ewei_shop_member",array('credit2'=>$credit),array('id'=>$paid['id']));
             }
             if($member['fid'] != 0){
                 pdo_insert("ewei_shop_commission_list",array('uid'=>$member['id'],'getcomid'=>$member['fid'],'commission'=>$order['price'] * 0.1,'status'=>6,'create_time'=>time()));
