@@ -46,6 +46,8 @@
                    <a href="<?php  echo mobileUrl('member/team',array('id'=>$member['id']))?>">
                         <div class="title">团队人数</div>
                         <div class="num"><?php  echo $num?>人</div>
+                       <div class="" style="color: #fff">团队业绩</div>
+                       <div class="num"><?php  if(empty($price)) { ?>0<?php  } else { ?><?php  echo $price?><?php  } ?>元</div>
                     </a>
                 </div>
             </div>
