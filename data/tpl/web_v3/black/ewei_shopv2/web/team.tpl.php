@@ -1,5 +1,5 @@
 <?php defined('IN_IA') or exit('Access Denied');?><?php (!empty($this) && $this instanceof WeModuleSite || 1) ? (include $this->template('_header', TEMPLATE_INCLUDEPATH)) : (include template('_header', TEMPLATE_INCLUDEPATH));?>
-<div class="page-header">当前位置：<span class="text-primary">代理区域列表</span></div>
+<div class="page-header">当前位置：<span class="text-primary">代理人列表</span></div>
 <div class="page-content">
     <form action="./index.php" method="get" class="form-horizontal form-search" role="form">
         <input type="hidden" name="c" value="site"/>
@@ -8,11 +8,7 @@
         <input type="hidden" name="do" value="web"/>
         <input type="hidden" name="r" value="member.level"/>
         <div class="page-toolbar">
-            <div class="pull-left">
-                <?php if(cv('member.level.add')) { ?>
-                <a class='btn btn-primary btn-sm' href="<?php  echo webUrl('member/area/add')?>"><i class='fa fa-plus'></i> 添加代理区域</a>
-                <?php  } ?>
-            </div>
+
             <div class="pull-right col-md-6">
                 <div class="input-group">
                     <input type="text" class=" form-control" name='keyword' value="<?php  echo $_GPC['keyword'];?>"
@@ -24,7 +20,7 @@
             </div>
         </div>
     </form>
-    <?php  if(empty($agency)) { ?>
+    <?php  if(empty($member)) { ?>
     <div class="panel panel-default">
         <div class="panel-body empty-data">未查询到相关数据</div>
     </div>
@@ -35,18 +31,20 @@
             <tr>
                 <th style="width:16%;">id</th>
                 <th style="width:16%;">代理人</th>
-                <th style="width:16%;">区域</th>
-                <th style="width:16%;">分成比例</th>
-                <th style="width:16%;">操作</th>
+                <th style="width:16%;">代理区域</th>
+                <th style="width:16%;">电话</th>
+                <th style="width:16%;">分成</th>
+                <th style="width: 20%;">操作</th>
             </tr>
             </thead>
             <tbody>
-            <?php  if(is_array($agency)) { foreach($agency as $v) { ?>
+            <?php  if(is_array($member)) { foreach($member as $v) { ?>
             <tr>
                 <td><?php  echo $v['id'];?></td>
-                <td><?php  echo $v['address'];?>代理人</td>
-                <td><?php  echo $v['address'];?></td>
-                <td><?php  echo $v['proportion'];?> %</td>
+                <td><?php  echo $v['nickname'];?></td>
+                <td><?php  echo $v['agency']['address'];?></td>
+                <td><?php  echo $v['mobile'];?></td>
+                <td><?php  echo $v['agency']['proportion'];?> %</td>
                 <td>
                     <?php if(cv('member.transfer.del')) { ?>
                     <a data-toggle='ajaxRemove'

@@ -678,14 +678,19 @@ class System_EweiShopV2Model {
                                 "route" => "area"
                             )
                         )
-                    ),
-                    array(
-                        "title" => "加盟列表",
-                        "route" => "shareholder"
-                    ),
-                    array(
-                        "title" => "股东规则",
-                        "route" => "shareholderRule"
+                    ),array(
+                        "title" => "加盟设置",
+                        "route" => "",
+                        "items" => array(
+                            array(
+                                "title" => "加盟列表",
+                                "route" => "league"
+                            ) ,
+                            array(
+                                "title" => "加盟分成",
+                                "route" => "divide"
+                            )
+                        )
                     ),
                     array(
                         "title" => "转账记录",
@@ -843,6 +848,29 @@ class System_EweiShopV2Model {
                             array(
                                 "title" => "增长趋势",
                                 "route" => "member_increase"
+                            )
+                        )
+                    )
+                )
+            ) ,
+            "team" => array(
+                "title" => "团队",
+                "subtitle" => "团队展示",
+                "icon" => "statistics",
+                "items" => array(
+                    array(
+                        "title" => "团队奖金",
+                    ) ,
+                    array(
+                        "title" => "团队",
+                        "items" => array(
+                            array(
+                                "title" => "销售指标",
+                                "route" => "sale_analysis"
+                            ) ,
+                            array(
+                                "title" => "订单统计",
+                                "route" => "order"
                             )
                         )
                     )

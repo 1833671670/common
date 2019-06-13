@@ -24,7 +24,7 @@
             </div>
         </div>
     </form>
-    <?php  if(empty($list)) { ?>
+    <?php  if(empty($member)) { ?>
     <div class="panel panel-default">
         <div class="panel-body empty-data">未查询到相关数据</div>
     </div>
@@ -34,21 +34,21 @@
             <thead>
             <tr>
                 <th style="width:16%;">id</th>
-                <th style="width:16%;">转账人</th>
-                <th style="width:16%;">收款人</th>
-                <th style="width:16%;">转账金额</th>
-                <th style="width:16%;">时间</th>
+                <th style="width:16%;">代理人</th>
+                <th style="width:16%;">代理区域</th>
+                <th style="width:16%;">电话</th>
+                <th style="width:16%;">分成</th>
                 <th style="width: 20%;">操作</th>
             </tr>
             </thead>
             <tbody>
-            <?php  if(is_array($list)) { foreach($list as $v) { ?>
+            <?php  if(is_array($member)) { foreach($member as $v) { ?>
             <tr>
                 <td><?php  echo $v['id'];?></td>
-                <td><?php  echo $mobile[$v['transferor']];?></td>
-                <td><?php  echo $mobile[$v['payee']];?></td>
-                <td><?php  echo $v['price'];?></td>
-                <td><?php  echo date('Y-m-d', $v['create_time'])?></td>
+                <td><?php  echo $v['nickname'];?></td>
+                <td><?php  echo $v['agency']['address'];?></td>
+                <td><?php  echo $v['mobile'];?></td>
+                <td><?php  echo $v['agency']['proportion'];?> %</td>
                 <td>
                     <?php if(cv('member.transfer.del')) { ?>
                     <a data-toggle='ajaxRemove'

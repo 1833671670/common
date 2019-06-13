@@ -169,6 +169,7 @@
         }, function (res) {
             if (res.code == 0) {
                 tip.msgbox.suc(res.msg);
+                window.location.reload();
             }else{
                 tip.msgbox.err(res.msg);
             }

@@ -74,7 +74,7 @@
 
     <span class="text-primary">
 
-    <?php  if(!empty($item['id'])) { ?>编辑<?php  } else { ?>添加<?php  } ?>代理<small><?php  if(!empty($item['id'])) { ?>修改【<span class="text-info"><?php  echo $item['title'];?></span>】<?php  } ?><?php  if(!empty($merch_user['merchname'])) { ?>商户名称:【<span class="text-info"><?php  echo $merch_user['merchname'];?></span>】<?php  } ?></small>
+    <?php  if(!empty($item['id'])) { ?>编辑<?php  } else { ?>添加<?php  } ?>加盟商<small><?php  if(!empty($item['id'])) { ?>修改【<span class="text-info"><?php  echo $item['title'];?></span>】<?php  } ?><?php  if(!empty($merch_user['merchname'])) { ?>商户名称:【<span class="text-info"><?php  echo $merch_user['merchname'];?></span>】<?php  } ?></small>
 
     </span>
 
@@ -110,12 +110,11 @@
                             <div class="form-group dispatch_info">
                                 <label class="col-sm-2 control-label">代理选择</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control tpl-category-parent select2" id="is_agency" name="is_agency"  data-rule-required="true" >
-                                        <option>选择代理</option>
-                                        <?php  if(is_array($agency)) { foreach($agency as $row) { ?>
-                                        <option value="<?php  echo $row['id'];?>" ><?php  echo $row['address'];?></option>
-                                        <?php  } } ?>
-                                    </select>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="is_league" value="1"<?php  if(empty($item['status'])) { ?>checked="true"<?php  } ?>/> 加盟</label>
+
+                                    <label class="radio-inline">
+                                        <input type="radio" name="is_league" value="0"<?php  if($item['status'] == 1) { ?>checked="true"<?php  } ?>   /> 禁止</label>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +126,7 @@
             <label class="col-sm-2 control-label"></label>
             <div class="col-sm-9 subtitle">
                 <a id="submit" class="btn btn-primary">保存管理</a>
-                <a class="btn btn-default" href="<?php  echo webUrl('admins')?>">返回列表</a>
+                <a class="btn btn-default" href="<?php  echo webUrl('member/league')?>">返回列表</a>
             </div>
         </div>
     </form>
@@ -136,19 +135,19 @@
 <script type="text/javascript">
 
     $('#submit').click(function () {
-        var is_agency = $("#is_agency option:selected").val();
         var user = $("#user option:selected").val();
-
+        var is_league = $("input[name=is_league]:checked").val();
+        console.log(is_league);
         if (isNaN(user)) {
             tip.msgbox.err('用户必选!');
             return false;
         }
-        if (isNaN(is_agency)) {
+        if (isNaN(is_league)) {
             tip.msgbox.err('角色必选!');
             return false;
         }
-        $.post("<?php  echo webUrl('member/agency/post')?>", {
-            is_agency:is_agency,
+        $.post("<?php  echo webUrl('member/league/post')?>", {
+            is_league:is_league,
             user:user,
         }, function (res) {
             console.log(res);
